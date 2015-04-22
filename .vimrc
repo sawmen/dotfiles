@@ -15,16 +15,38 @@ set clipboard=unnamed,autoselect
 " ----------------------------------------------------------------------------------------
 "   neobundle
 " ----------------------------------------------------------------------------------------
-set nocompatible               " Be iMproved
+" Note: Skip initialization for vim-tiny or vim-small.
+ if !1 | finish | endif
 
-if has('vim_starting')
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+ if has('vim_starting')
+     if &compatible
+         set nocompatible               " Be iMproved
+     endif
 
-call neobundle#rc(expand('~/.vim/bundle/'))
+     " Required:
+     set runtimepath+=~/.vim/bundle/neobundle.vim/
+ endif
 
-" Let NeoBundle manage NeoBundle
-NeoBundleFetch 'Shougo/neobundle.vim'
+ " Required:
+ call neobundle#begin(expand('~/.vim/bundle/'))
+
+ " Let NeoBundle manage NeoBundle
+ " Required:
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
+ " My Bundles here:
+ " Refer to |:NeoBundle-examples|.
+ " Note: You don't set neobundle setting in .gvimrc!
+
+ call neobundle#end()
+
+ " Required:
+ filetype plugin indent on
+
+ " If there are uninstalled bundles found onstartup,
+ " this will conveniently prompt you to install them.
+ NeoBundleCheck
+
 
 " Recommended to install
 " After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
